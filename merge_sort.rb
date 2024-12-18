@@ -45,7 +45,7 @@ class MergeSort
         puts "Enter The Number of Element: "
         len = gets.strip
     
-        if len.empty? || len.to_i <= 0 
+        if len.to_i <= 0 
             puts "Please Enter a Valid Number :)"
             return
         end
@@ -55,7 +55,7 @@ class MergeSort
         puts "Enter the Elements:"
         i = 0
         while i < len
-            input = gets
+            input = gets.strip
             begin
               arr[i] = Integer(input)   # Number Conversion
               i += 1
@@ -63,11 +63,10 @@ class MergeSort
               puts "Please enter a valid integer value"
             end
         end
-            
         split_array(arr, 0, len - 1)
-        puts "Sorted array: #{arr}"        
+        return arr
     end
 end
 
 sort = MergeSort.new
-sort.merge_sort()
+p sort.merge_sort()

@@ -12,18 +12,6 @@ module TransactionHistory
     }
   end
 
-  def set_transaction(from_customer, to_customer, status, message, amount)
-    $transaction_id += 1
-    $transaction_data[$transaction_id] = {
-      "from_customer" => from_customer,
-      "to_customer" => to_customer,
-      "status" => status,
-      "message" => message,
-      "amount" => amount,
-      "time" => "#{(Time.now.hour % 12 == 0 ? 12 : Time.now.hour % 12)}:#{Time.now.min}:#{Time.now.sec} #{Time.now.hour >= 12 ? 'PM' : 'AM'} Date: #{Time.now.day}/#{Time.now.mon}/#{Time.now.year}"
-    }
-  end
-
   def get_transaction_history(acc_num)
     selected_history = $transaction_data.values.select do |transaction|
         transaction["from_customer"] == acc_num || transaction["to_customer"] == acc_num    

@@ -117,10 +117,10 @@ class Transaction
           sender['balance'] -= amount
           receiver['balance'] += amount
           puts "Transferred ₹#{amount} from account number #{sender_acc_num} to account number #{receiver_acc_num}"
-          Transaction.set_transaction(sender_acc_num, receiver_acc_num, "Success", "Amount transfer successfully",amount)
+          Transaction.record_transaction(sender_acc_num, receiver_acc_num, "Success", "Amount transfer successfully",amount)
         else
           puts "Invalid transfer amount or insufficient funds!"
-          Transaction.set_transaction(sender_acc_num, receiver_acc_num, "Failure", "Insufficient funds or invalid amount",amount)
+          Transaction.record_transaction(sender_acc_num, receiver_acc_num, "Failure", "Insufficient funds or invalid amount",amount)
         end
       else
         puts "Invalid sender or receiver account number!"

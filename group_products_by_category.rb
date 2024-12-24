@@ -19,6 +19,11 @@ class ProductOrganizer
   
       result
     end
+
+    def find_product_by_key(key)
+        group_products_by_category[key][:products] || 0
+    end
+
 end
 
 products = [
@@ -32,3 +37,4 @@ products = [
   
 organizer = ProductOrganizer.new(products)
 p organizer.group_products_by_category
+p organizer.find_product_by_key("Electronics")

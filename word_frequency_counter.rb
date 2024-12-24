@@ -21,9 +21,7 @@ class WordFrequencyCounter
     char_arr = []
     word_arr.each do |word|
       word = word.gsub(/["!.,"]/,"").downcase
-      word.split.each do |seprate|
-        char_arr.push(seprate)
-      end
+      word.split.each{ |seprate| char_arr.push(seprate) }
     end
     char_arr.tally
   end

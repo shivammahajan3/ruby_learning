@@ -1,95 +1,65 @@
-def word_frequency_counter(input)
-    word_arr = []
-    stack = [input]
-    while !stack.empty?
-      element = stack.pop
-      if element.is_a? String
-        word_arr.push(element)
-      elsif element.is_a? Array
-        stack.push(*element)
-      elsif element.is_a? Hash
-        stack.push(*element.keys.map{|ele| ele.to_s})
-        stack.push(*element.values)
-      end
+class WordFrequencyCounter
+
+    def initialize(input)
+      @input = input
+    end
+  
+    def word_frequency_counter
+        word_arr = []
+        stack = [@input]
+        while !stack.empty?
+          element = stack.pop
+          if element.is_a? String
+            word_arr.push(element)
+          elsif element.is_a? Array
+            stack.push(*element)
+          elsif element.is_a? Hash
+            stack.push(*element.keys.map{|ele| ele.to_s})
+            stack.push(*element.values)
+          end
+        end
+        split_words(word_arr).tally
     end
 
-  char_arr = []
-  word_arr.each do |word|
-    word = word.gsub(/["!.,"]/,"").downcase
-    word.split.each do |seprate|
-      char_arr.push(seprate)
+    def split_words(word_arr)
+        char_arr = []
+        word_arr.each do |word|
+          word = word.gsub(/["!.,"]/,"").downcase
+          word.split.each{ |seprate| char_arr.push(seprate) }
+        end
+        char_arr
     end
+
   end
-
-  char_arr.tally
-
-end
-
-input_str = "Hello world, welcome to Ruby!"
-p word_frequency_counter(input_str)
-# {
-#   "hello" => 1,
-#   "world" => 1,
-#   "welcome" => 1,
-#   "to" => 1,
-#   "ruby" => 1
-# }
-
-input_hash = {
-  "hello world" => "Ruby is fun",
-  details: {
-    description: "Ruby rocks in the programming world",
-    :"extra info" => ["hello again", "world of Ruby"]
+  
+  input_str = ["Hello world, welcome to Ruby!"]
+  counter = WordFrequencyCounter.new(input_str)
+  p counter.word_frequency_counter
+  
+  input_hash = {
+    "hello world" => "Ruby is fun",
+    details: {
+      description: "Ruby rocks in the programming world",
+      :"extra info" => ["hello again", "world of Ruby"]
+    }
   }
-}
-
-p word_frequency_counter(input_hash)
-# {
-#   "hello" => 2,
-#   "world" => 3,
-#   "ruby" => 3,
-#   "is" => 1,
-#   "fun" => 1,
-#   "rocks" => 1,
-#   "in" => 1,
-#   "the" => 1,
-#   "programming" => 1,
-#   "extra" => 1,
-#   "info" => 1,
-#   "again" => 1,
-#   "of" => 1
-# }
-
-input_arr = [
-  "Hello world",
-  { 
-    "Ruby language" => "is fun",
-    details: [
-      "Ruby rocks", 
-      { "hello again" => "world is round" }
+  counter = WordFrequencyCounter.new(input_hash)
+  p counter.word_frequency_counter
+  
+  input_arr = [
+    "Hello world",
+    { 
+      "Ruby language" => "is fun",
+      details: [
+        "Ruby rocks", 
+        { "hello again" => "world is round" }
+      ]
+    },
+    [
+      "Complex structures are interesting",
+      { more_data: ["Hello", "world of Ruby"] }
     ]
-  },
-  [
-    "Complex structures are interesting",
-    { more_data: ["Hello", "world of Ruby"] }
   ]
-]
-
-p word_frequency_counter(input_arr)
-
-# {
-#   "hello" => 4,
-#   "world" => 4,
-#   "ruby" => 3,
-#   "language" => 1,
-#   "is" => 2,
-#   "fun" => 1,
-#   "rocks" => 1,
-#   "again" => 1,
-#   "round" => 1,
-#   "complex" => 1,
-#   "structures" => 1,
-#   "are" => 1,
-#   "interesting" => 1,
-#   "of" => 1
-# }
+  
+  counter = WordFrequencyCounter.new(input_arr)
+  p counter.word_frequency_counter

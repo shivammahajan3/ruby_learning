@@ -8,18 +8,17 @@ class ProductOrganizer
   def initialize(products)
     @result = group_products_by_category_result(products)
   end
->>>>>>> training-20-december-2024
 
-    arr_hash.each do |product|
-        hash.keys.each do |key|
-            if product[:category] == key
-                hash[key][:products] << product[:name]
-                hash[key][:total_count] += 1
-                hash[key][:total_price] += product[:price]
-            end
-        end
+  arr_hash.each do |product|
+    hash.keys.each do |key|
+      if product[:category] == key
+        hash[key][:products] << product[:name]
+        hash[key][:total_count] += 1
+        hash[key][:total_price] += product[:price]
+      end
     end
-    hash
+  end
+  hash
 end
 
 products = [

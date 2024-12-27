@@ -1,9 +1,14 @@
-def group_products_by_category(arr_hash)
-    hash = {}
-    arr_hash.each do |product|
-        category = product[:category]
-        hash[category] = {products:[], total_count: 0, total_price: 0}
-    end
+require_relative 'product_grouping' 
+
+class ProductOrganizer
+
+  include ProductGrouping
+  attr_accessor :result
+
+  def initialize(products)
+    @result = group_products_by_category_result(products)
+  end
+>>>>>>> training-20-december-2024
 
     arr_hash.each do |product|
         hash.keys.each do |key|
@@ -18,12 +23,17 @@ def group_products_by_category(arr_hash)
 end
 
 products = [
-  { name: "Laptop", price: 1000, category: "Electronics" },
-  { name: "Phone", price: 700, category: "Electronics" },
-  { name: "T-shirt", price: 20, category: "Clothing" },
-  { name: "Jeans", price: 40, category: "Clothing" },
-  { name: "Fridge", price: 500, category: "Appliances" },
-  { name: "Microwave", price: 150, category: "Appliances" }
-]
+  { name: 'Laptop', price: 1000, category: 'Electronics' },
+  { name: 'Phone', price: 700, category: 'Electronics' },
+  { name: 'T-shirt', price: 20, category: 'Clothing' },
+  { name: 'Jeans', price: 40, category: 'Clothing' },
+  { name: 'Fridge', price: 500, category: 'Appliances' },
+  { name: 'Microwave', price: 150, category: 'Appliances' }
+] * 100000
 
-p group_products_by_category(products)
+organizer = ProductOrganizer.new(products)
+p organizer.group_products_by_category
+p organizer.find_product_by_category('Electronics')
+p organizer.find_product_by_category('Clothing')
+p organizer.find_product_by_category('Electronicsrgjrfj')
+

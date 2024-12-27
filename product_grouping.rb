@@ -1,5 +1,5 @@
 module ProductGrouping
-  def group_products_by_category_result
+  def group_products_by_category_result(products)
     result = {}
     products.each do |product|
       category = product[:category]
@@ -17,7 +17,7 @@ module ProductGrouping
     result
   end
 
-  def find_product_by_key(key)
+  def find_product_by_category(key)
     result[key] ? result[key][:products] : 0
   end
 end
